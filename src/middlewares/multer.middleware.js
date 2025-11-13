@@ -1,15 +1,30 @@
 import multer from "multer";
 
-const storage = multer.memoryStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./public/temp")
+    cb(null, "./public/temp"); // ✅ Files will be saved here
   },
   filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 
-    cb(null, file.originalname)
-  }
-})
+export const upload = multer({ storage });
 
-export const upload = multer({
-  storage,
-})
+
+
+// import multer from "multer";
+
+// const storage = multer.memoryStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "./public/temp")
+//   },
+//   filename: function (req, file, cb) {
+
+//     cb(null, file.originalname)
+//   }
+// })
+
+// export const upload = multer({
+//   storage,
+// })
